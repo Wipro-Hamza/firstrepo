@@ -82,10 +82,8 @@ public class Service {
 				status = false;
 				break;
 			}
-
 		}
 		System.out.println("Thank you for using the system.");
-
 	}
 
 	private static void menu() {
@@ -214,13 +212,12 @@ public class Service {
 	}
 	
 	private static void createBillingMenu() {
-		System.out.println("This is the Customer Menu");		 
 		 boolean status = true;
 		 while(status)
 		 {
-			 int input = scanner.nextInt();
 			 select();
-			 
+			 int input = scanner.nextInt();
+			 			 
 			 switch(input)
 			 {
 			 case 1:
@@ -245,23 +242,26 @@ public class Service {
 	
 	private static void select(){
 		System.out.println("Billing menu");
-		System.out.println("To enter a new Bill press 1");
-		System.out.println("To update a Bill press 2");
-		System.out.println("To view a  Bill press 3");
+		System.out.println("To create a new Bill press 1");
+		System.out.println("To update an existing Bill press 2");
+		System.out.println("To view an existing  Bill press 3");
 		System.out.println("To delete a Bill press 4");
 		System.out.println("To exit the menu press 5");
 	}
 
-	
-
 	private static void newBill()
 	{
+		System.out.println("You entered 1 to create a new Bill");
 		//Read values from user
-		System.out.println("Enter billingID, customerId, productID, billingQuantity and billprice");
-		String billingID=scanner.nextLine();
-		String customerID = scanner.nextLine();
+		System.out.println("Enter billingID");
+		int billingID=scanner.nextInt();
+		System.out.println("Enter the customer ID,");
+		int customerID = scanner.nextInt();
+		System.out.println("Enter the product ID");
 		String productID = scanner.nextLine();
+		System.out.println("Enter the total product quantity");
 		int billingQuantity = Integer.parseInt(scanner.next());
+		System.out.println("Enter the total price");
 		double billprice = Double.parseDouble(scanner.next());
 		
 		//create a bean
@@ -282,12 +282,18 @@ public class Service {
 	
 	private static void updateBill()
 	{
+		System.out.println("You have entered 2 to update an existing Bill");
+
 		//Read values from user
-		System.out.println("Enter productID and Quantity to be updated, and billingID");
+		System.out.println("Enter the billing ID");
+		int billingID = scanner.nextInt();
+		
+		System.out.println("Enter new Billing details below:");
+		System.out.println("Enter productID");
 		String productID = scanner.nextLine();
-		int billingQuantity = Integer.parseInt(scanner.nextLine());
-		String billingID = scanner.nextLine();
-				
+		System.out.println("Enter the total quantity");
+		int billingQuantity = scanner.nextInt();
+		
 		//create a bean  
 		Billing bean=new Billing();
 		bean.setProductID(productID);
@@ -304,9 +310,10 @@ public class Service {
 	
 	private static void viewBill()
 	{
+		System.out.println("You entered 3 to view an exisiting Bill");
 		//Read values from user
-		System.out.println("Enter customer id to display information");
-		String customerID = scanner.nextLine();
+		System.out.println("Enter the customer id to display information");
+		int customerID = scanner.nextInt();
 		
 		//create a bean
 		Billing bean=new Billing();
@@ -314,22 +321,24 @@ public class Service {
 	
 		//invoke the DAO method
 		BillingDAO dao=new BillingDAO();
-		dao.read(bean);
+		bean = dao.read(customerID);
+		System.out.println(bean.toString());
 	}
 	
 	private static void deleteBill()
 	{
+		System.out.println("You have entered 4 to delete a Bill");
 		//Read values from user
 		System.out.println("Enter billing id to be deleted");
-		String billingID = scanner.nextLine();
+		int billingID = scanner.nextInt();
 		
 		//create a bean
-		Billing bean=new Billing();
-		bean.setBillingID(billingID);
+//		Billing bean=new Billing();
+//		bean.setBillingID(billingID);
 
 		//invoke the DAO method
 		BillingDAO dao = new BillingDAO();
-		if (dao.delete(bean))
+		if (dao.delete(billingID))
 			System.out.println("Record Deleted");
 		else	
 			System.out.println("Record not Deleted");		

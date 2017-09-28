@@ -2,22 +2,22 @@ package com.sainsburys.sms.beans;
 
 public class Billing {
 	
-	private String billingID;
-	private String customerID;
+	private int billingID;
+	private int customerID;
 	private String productID;
 	private int billingQuantity;
 	private double billprice;
 	
-	public String getBillingID() {
+	public int getBillingID() {
 		return billingID;
 	}
-	public void setBillingID(String billingID) {
+	public void setBillingID(int billingID) {
 		this.billingID = billingID;
 	}
-	public String getCustomerID() {
+	public int getCustomerID() {
 		return customerID;
 	}
-	public void setCustomerID(String customerID) {
+	public void setCustomerID(int customerID) {
 		this.customerID = customerID;
 	}
 	public String getProductID() {
